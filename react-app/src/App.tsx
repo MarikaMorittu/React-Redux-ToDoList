@@ -1,6 +1,9 @@
 import React from "react";
 import "./App.css";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate} from 'react-router-dom'
+import LoginCard from "./components/loginCard/LoginCard";
+
 
 export let usersArray = [
   {
@@ -13,12 +16,15 @@ export let usersArray = [
   },
 ];
 
+
 // const userRedirect = () => {
 //   navigate:
 // }
 
 function App() {
-  return <div className="App"></div>;
+  return <div className="App">
+    <LoginCard />
+  </div>;
 }
 
 export default App;

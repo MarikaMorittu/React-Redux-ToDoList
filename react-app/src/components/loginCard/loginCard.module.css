@@ -1,0 +1,26 @@
+/* GENERAL SETTINGS */
+*{
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-weight: 200;
+    margin: 0;
+    padding: 0;
+}
+
+h2{
+    margin-top: 40px;
+}
+
+.cardContainer{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 24px;
+}
