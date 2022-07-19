@@ -18,7 +18,7 @@ export const loginReducer = (state = intialState, action: loginActions): State =
       return {
         ...state,
         email:action.payload
-       }
+      }
     case 'SET_PASSWORD':
       return{
         ...state,

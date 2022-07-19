@@ -13,10 +13,10 @@ function LoginCard() {
   // 
   useEffect(() => {
     if (state.email.trim() && state.password.trim()) {
-     dispatch({
-       type: 'SET_IS_BUTTON_DISABLED',
-       payload: false
-     });
+      dispatch({
+        type: 'SET_IS_BUTTON_DISABLED',
+        payload: false
+      });
     } else {
       dispatch({
         type: 'SET_IS_BUTTON_DISABLED',
@@ -31,11 +31,13 @@ function LoginCard() {
         type: 'LOGIN_SUCCESS',
         payload: 'Login Successfully'
       });
+      console.log('OK')
     } else {
       dispatch({
         type: 'LOGIN_FAILED',
         payload: 'Incorrect username or password'
       });
+      console.log('NO')
     }
   };
 
