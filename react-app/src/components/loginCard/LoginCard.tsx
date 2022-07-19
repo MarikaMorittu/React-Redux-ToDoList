@@ -3,8 +3,22 @@ import React, { useEffect, useReducer, useState } from "react";
 import { intialState, loginReducer } from "../../redux/loginReducer";
 import styles from '../loginCard/loginCard.module.css'
 
+const usersArray = [
+  {
+    email: "marika@gmail.com",
+    password: "Abc12-deF",
+  },
+  {
+    email: "elisa@gmail.com",
+    password: "Abc34-deF",
+  },
+];
 
 
+interface IUsersArray {
+  email:string,
+  password:string
+}
 
 function LoginCard() {
 
@@ -26,7 +40,7 @@ function LoginCard() {
   }, [state.email, state.password]);
 
   const handleLogin = () => {
-    if (state.email === 'abc@email.com' && state.password === 'password') {
+    if (usersArray.includes(state.email) && usersArray.includes(state.password)) {
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: 'Login Successfully'
@@ -39,6 +53,7 @@ function LoginCard() {
       });
       console.log('NO')
     }
+    
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
