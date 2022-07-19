@@ -2,6 +2,7 @@ import React from "react";
 import styles from '../loginCard/loginCard.module.css'
 
 function LoginCard() {
+
   return <div className={styles.mainContainer}>
     {/* <input type='text' placeholder="text" />
     <button>Submit</button> */}
@@ -15,6 +16,8 @@ function LoginCard() {
       <button>Register Now</button>
     </div>
   </div>
+
+
   </div>;
 }
 
