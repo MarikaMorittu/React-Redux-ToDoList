@@ -1,6 +1,6 @@
-import { Login_Button } from "./loginTypes";
-
-export const submitUser = (userChecked: string): Login_Button => ({
-  type: "SUBMIT_LOGIN",
-  payload: userChecked,
-});
+export type loginActions = { type: 'SET_EMAIL', payload: string }
+  | { type: 'SET_PASSWORD', payload: string }
+  | { type: 'SET_IS_BUTTON_DISABLED', payload: boolean }
+  | { type: 'LOGIN_SUCCESS', payload: string }
+  | { type: 'LOGIN_FAILED', payload: string }
+  | { type: 'SET_IS_ERROR', payload: boolean };

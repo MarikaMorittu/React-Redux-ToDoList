@@ -1,17 +1,51 @@
 import { usersArray } from "../App";
-import { Login_Button } from "./loginTypes";
+import { loginActions } from "./loginAction";
+import { State } from "./loginTypes";
 
-const intialState = {
-  user: false,
+
+// create intial state
+export const intialState = {
+  email: '',
+  password: '',
+  isButtonDisabled: true,
+  helperText: '',
+  isError: false
 };
 
-export const loginReducer = (state = intialState, action: Login_Button) => {
-  switch (action.type) {
-    case "SUBMIT_LOGIN": {
+export const loginReducer = (state = intialState, action: loginActions): State => {
+  switch(action.type){
+    case 'SET_EMAIL':
       return {
         ...state,
-        user: true,
-      };
-    }
+        email:action.payload
+       }
+    case 'SET_PASSWORD':
+      return{
+        ...state,
+        password:action.payload
+      }
+    case 'SET_IS_BUTTON_DISABLED':
+      return{
+        ...state,
+        isButtonDisabled:action.payload
+      }
+    case 'LOGIN_SUCCESS':
+      return{
+        ...state,
+        helperText:action.payload,
+        isError: false
+      }
+    case 'LOGIN_FAILED':
+      return{
+        ...state,
+        helperText:action.payload,
+        isError:true
+      }
+    case 'SET_IS_ERROR':
+      return{
+        ...state,
+        isError:action.payload
+      }
+    default: return state
   }
 };

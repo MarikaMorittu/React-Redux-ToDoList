@@ -1,61 +1,81 @@
 import { getValue } from "@testing-library/user-event/dist/utils";
-import React, { useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
+import { intialState, loginReducer } from "../../redux/loginReducer";
 import styles from '../loginCard/loginCard.module.css'
+
 
 
 
 function LoginCard() {
 
-  const [password, setPassword] = useState(false);
-  // password checks
-  const [passwordLength, setPasswordLength] = useState(false)
-  const [passwordRequiredLength, setPasswordRequiredLength] = useState(8)
-  const [passwordUppercase, setPasswordUppercase] = useState(false)
-  const [passwordNumber, setPasswordNumber] = useState(false)
-  const [passwordSpecialChar, setPasswordSpecialChar] = useState(false)
+  const [state, dispatch] = useReducer(loginReducer, intialState);
 
+  // 
+  useEffect(() => {
+    if (state.email.trim() && state.password.trim()) {
+     dispatch({
+       type: 'SET_IS_BUTTON_DISABLED',
+       payload: false
+     });
+    } else {
+      dispatch({
+        type: 'SET_IS_BUTTON_DISABLED',
+        payload: true
+      });
+    }
+  }, [state.email, state.password]);
 
-  // const passwordCheck = (password: any) => {
-  //   if (password < 8){
-  //     console.log('OK')
-  //   }else{
-  //     console.log('NO')
-  //   }
-  // }
+  const handleLogin = () => {
+    if (state.email === 'abc@email.com' && state.password === 'password') {
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        payload: 'Login Successfully'
+      });
+    } else {
+      dispatch({
+        type: 'LOGIN_FAILED',
+        payload: 'Incorrect username or password'
+      });
+    }
+  };
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.keyCode === 13 || event.which === 13) {
+      state.isButtonDisabled || handleLogin();
+    }
+  };
 
-  // const [state, setState] = useState({email: '', password: ''})
+  const handleUsernameChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      dispatch({
+        type: 'SET_EMAIL',
+        payload: event.target.value
+      });
+    };
 
-  // create email validation hook
-  // const checkUserEmail = (mail: any) => {
-  //   const validEmail = /@/.test(mail)
-  //   return validEmail
-  // }
+  const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      dispatch({
+        type: 'SET_PASSWORD',
+        payload: event.target.value
+      });
+    }
 
-  // const validEmail = checkUserEmail(state.email)
-
-  // handle change function
-  // const handleChangeEmail = (mail: any) => {
-  //   if(mail == validEmail){
-  //     console.log('ok')
-  //   }else{
-  //     console.log('no')
-  //   }
-  // }
-
+    // 
 
   return <div className={styles.mainContainer}>
     <h2>Login with your credentials: </h2>
     <div className={styles.cardContainer}>
-      <input type='text' placeholder="email here..." className={styles.firstInput}/>
-      <input type='text' placeholder="password here..." className={styles.firstInput}/>
-      {/* <input onChange={passwordCheck} value={''} type='text' placeholder="password here..." className={styles.secondInput}/> */}
+      <input type='email' placeholder="email here..." className={styles.firstInput} onChange={handleUsernameChange} onKeyPress={handleKeyPress}/>
+      <input type='password' placeholder="password here..." className={styles.firstInput} onChange={handlePasswordChange} onKeyPress={handleKeyPress} />
       <div className={styles.btnContainer}>
-        <button>Submit</button>
+        <button onClick={handleLogin} disabled={state.isButtonDisabled}>Submit</button>
         <button>Register Now</button>
       </div>
     </div>
   </div>;
 }
 
+
 export default LoginCard;
+

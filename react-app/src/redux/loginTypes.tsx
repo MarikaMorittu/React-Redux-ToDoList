@@ -1,1 +1,7 @@
-export type Login_Button = { type: "SUBMIT_LOGIN"; payload: string };
+export type State = {
+  email: string
+  password:  string
+  isButtonDisabled: boolean
+  helperText: string
+  isError: boolean
+};
