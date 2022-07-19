@@ -1,7 +1,9 @@
 import React from "react";
 
 function LoginCard() {
-  return <div></div>;
+  return <div>
+    
+  </div>;
 }
 
 export default LoginCard;
