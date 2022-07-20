@@ -1,6 +1,6 @@
 import { usersArray } from "../../pages/loginCard/LoginCard";
 import { loginActions } from "./loginAction";
-import { State } from "./loginTypes";
+import { StateLogIn } from "./loginTypes";
 
 
 // create intial state
@@ -12,7 +12,7 @@ export const intialState = {
   isError: false
 };
 
-export const loginReducer = (state = intialState, action: loginActions): State => {
+export const loginReducer = (state = intialState, action: loginActions): StateLogIn => {
   switch(action.type){
     case 'SET_EMAIL':
       return {
