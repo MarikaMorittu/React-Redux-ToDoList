@@ -1,4 +1,4 @@
-import { usersArray } from "../App";
+import { usersArray } from "../components/loginCard/LoginCard";
 import { loginActions } from "./loginAction";
 import { State } from "./loginTypes";
 

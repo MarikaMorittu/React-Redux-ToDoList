@@ -3,7 +3,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { intialState, loginReducer } from "../../redux/loginReducer";
 import styles from '../loginCard/loginCard.module.css'
 
-const usersArray = [
+export const usersArray = [
   {
     email: "marika@gmail.com",
     password: "Abc12-deF",
@@ -57,7 +57,7 @@ function LoginCard() {
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.keyCode === 13 || event.which === 13) {
+    if (event.key == 'Enter') {
       state.isButtonDisabled || handleLogin();
     }
   };
