@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import { useNavigate} from 'react-router-dom'
-import LoginCard from "./components/loginCard/LoginCard";
-
+import LoginCard from "./pages/loginCard/LoginCard";
 
 
 

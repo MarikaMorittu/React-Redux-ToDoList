@@ -1,9 +1,9 @@
 import { getValue } from "@testing-library/user-event/dist/utils";
 import React, { useEffect, useReducer, useState } from "react";
-import { intialState, loginReducer } from "../../redux/loginReducer";
+import { intialState, loginReducer } from "../../redux/login/loginReducer";
 import styles from '../loginCard/loginCard.module.css'
 
-const usersArray = [
+export const usersArray = [
   {
     email: "marika@gmail.com",
     password: "Abc12-deF",
@@ -27,10 +27,10 @@ function LoginCard() {
   // 
   useEffect(() => {
     if (state.email.trim() && state.password.trim()) {
-     dispatch({
-       type: 'SET_IS_BUTTON_DISABLED',
-       payload: false
-     });
+      dispatch({
+        type: 'SET_IS_BUTTON_DISABLED',
+        payload: false
+      });
     } else {
       dispatch({
         type: 'SET_IS_BUTTON_DISABLED',
@@ -40,7 +40,8 @@ function LoginCard() {
   }, [state.email, state.password]);
 
   const handleLogin = () => {
-    if (usersArray.includes(state.email) && usersArray.includes(state.password)) {
+    if(state.email == 'prova' && state.password == 'prova'){
+    // if (usersArray.includes(state.email) && usersArray.includes(state.password)) {
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: 'Login Successfully'
@@ -57,7 +58,7 @@ function LoginCard() {
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.keyCode === 13 || event.which === 13) {
+    if (event.key == 'Enter') {
       state.isButtonDisabled || handleLogin();
     }
   };
