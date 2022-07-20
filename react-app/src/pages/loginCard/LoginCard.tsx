@@ -15,16 +15,11 @@ export const usersArray = [
 ];
 
 
-interface IUsersArray {
-  email:string,
-  password:string
-}
 
 function LoginCard() {
 
   const [state, dispatch] = useReducer(loginReducer, intialState);
 
-  // 
   useEffect(() => {
     if (state.email.trim() && state.password.trim()) {
       dispatch({
