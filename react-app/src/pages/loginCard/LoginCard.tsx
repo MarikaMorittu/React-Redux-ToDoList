@@ -1,6 +1,6 @@
 import { getValue } from "@testing-library/user-event/dist/utils";
 import React, { useEffect, useReducer, useState } from "react";
-import { intialState, loginReducer } from "../../redux/loginReducer";
+import { intialState, loginReducer } from "../../redux/login/loginReducer";
 import styles from '../loginCard/loginCard.module.css'
 
 export const usersArray = [
@@ -40,7 +40,8 @@ function LoginCard() {
   }, [state.email, state.password]);
 
   const handleLogin = () => {
-    if (usersArray.includes(state.email) && usersArray.includes(state.password)) {
+    if(state.email == 'prova' && state.password == 'prova'){
+    // if (usersArray.includes(state.email) && usersArray.includes(state.password)) {
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: 'Login Successfully'
