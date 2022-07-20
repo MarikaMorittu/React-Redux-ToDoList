@@ -48,16 +48,16 @@ const SignInCard = () => {
     const handleSignIn = () => {
         if(usersArray.find((element)=>element.email === state.email && element.password === state.password)){
             dispatch({
-                type: 'SET_SIGN_IN_SUCCESS',
+                type: 'SET_SIGN_IN_FAILED',
                 payload: 'User Registrated'
             })
-            console.log('OK')
+            console.log('NON puoi registrarti!')
         }else{
             dispatch({
-                type: 'SET_SIGN_IN_FAILED',
+                type: 'SET_SIGN_IN_SUCCESS',
                 payload: 'User not Registrated'
             })
-            console.log('NO')
+            console.log('puoi registrarti')
         }
     }
 

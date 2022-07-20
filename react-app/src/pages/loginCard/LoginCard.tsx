@@ -10,7 +10,7 @@ export const usersArray = [
   },
   {
     email: "elisa@gmail.com",
-    password: "Abc34-deF",
+    password: "ciaociao@!2",
   },
 ];
 
