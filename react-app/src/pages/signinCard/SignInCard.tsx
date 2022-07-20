@@ -2,17 +2,19 @@ import React, { useEffect, useReducer } from 'react'
 import styles from '../signinCard/signinCard.module.css'
 import { usersArray } from '../loginCard/LoginCard'
 import { initialState, signinReducer } from '../../redux/signin/signinReducer'
-import {connect} from 'react-redux'
+import { StateSignIn } from '../../redux/signin/signinTypes'
+// import {connect} from 'react-redux'
 
 
-const mapDispatchToProps = (dispatch: any) => {
-    return{
-        changeName: (event: any) => dispatch({type: 'SET_NAME', payload: event.target.value}),
-        changeSurname: (event: any) => dispatch({type: 'SET_SURNAME', payload: event.target.value}),
-        changeEmail: (event: any) => dispatch({type: 'SET_EMAIL', payload: event.target.value}),
-        changePassword: (event: any) => dispatch({type: 'SET_PASSWORD', payload: event.target.value})
-    }
-}
+// const mapDispatchToProps = (dispatch: any) => {
+//     return{
+//         changeName: (event: any) => dispatch({type: 'SET_NAME', payload: event.target.value}),
+//         changeSurname: (event: any) => dispatch({type: 'SET_SURNAME', payload: event.target.value}),
+//         changeEmail: (event: any) => dispatch({type: 'SET_EMAIL', payload: event.target.value}),
+//         changePassword: (event: any) => dispatch({type: 'SET_PASSWORD', payload: event.target.value})
+//     }
+// }
+
 
 
 const SignInCard = () => {
@@ -33,8 +35,14 @@ const SignInCard = () => {
         }
     }, [state.name, state.surname, state.email, state.password])
 
+    const validEmail = (email:any) =>{
+        return /\S+@\S+\.\S+/.test(email);
+
+    }
+
+
     const handleSignIn = () => {
-        if(state.email == 'prova', state.password == 'prova'){
+        if(state.email == '@gmail.com', state.password == 'prova'){
             dispatch({
                 type: 'SET_SIGN_IN_SUCCESS',
                 payload: 'User Registrated'
@@ -57,20 +65,58 @@ const SignInCard = () => {
     };
     
 
+    const handleNameChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      dispatch({
+        type: 'SET_NAME',
+        payload: event.target.value
+      });
+    };
+
+    const handleSurnameChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      dispatch({
+        type: 'SET_SURNAME',
+        payload: event.target.value
+      });
+    };
+
+    const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+        if(!validEmail(event.target.value)){
+            console.log('error')
+        }else{
+            dispatch({
+                type: 'SET_EMAIL',
+                payload: event.target.value
+            })
+        }
+            
+    };
+
+    const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      dispatch({
+        type: 'SET_PASSWORD',
+        payload: event.target.value
+      });
+    };
+
+
     return (
         <div>
             <h2>SignIn with your credentials: </h2>
             <div className={styles.SignIncardContainer}>
-                <input type='name' placeholder="name here..." className={styles.nameInput} />
-                <input type='surname' placeholder="surname here..." className={styles.surnameInput} />
-                <input type='email' placeholder="email here..." className={styles.firstInput} />
-                <input type='password' placeholder="password here..." className={styles.firstInput} />
+                <input type='name' placeholder="name here..." className={styles.nameInput} onChange={handleNameChange} onKeyPress={handleKeyPress}/>
+                <input type='surname' placeholder="surname here..." className={styles.surnameInput} onChange={handleSurnameChange} onKeyPress={handleKeyPress}/>
+                <input type='email' placeholder="email here..." className={styles.firstInput} onChange={handleEmailChange} onKeyPress={handleKeyPress}/>
+                <input type='password' placeholder="password here..." className={styles.firstInput} onChange={handlePasswordChange} onKeyPress={handleKeyPress}/>
                 <div className={styles.btnContainer}>
-                    <button>Register Now</button>
+                    <button onClick={handleSignIn} disabled={state.isButtonDisabled}>Register Now</button>
                 </div>
             </div>
         </div>
     )
 }
 
-export default connect (mapDispatchToProps) (SignInCard)
+export default SignInCard
