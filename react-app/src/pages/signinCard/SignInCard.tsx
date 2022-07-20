@@ -67,18 +67,18 @@ const SignInCard = () => {
 
     const handleNameChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      dispatch({
-        type: 'SET_NAME',
-        payload: event.target.value
-      });
+        dispatch({
+            type: 'SET_NAME',
+            payload: event.target.value
+        });
     };
 
     const handleSurnameChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      dispatch({
-        type: 'SET_SURNAME',
-        payload: event.target.value
-      });
+        dispatch({
+            type: 'SET_SURNAME',
+            payload: event.target.value
+        });
     };
 
     const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> =
@@ -96,10 +96,10 @@ const SignInCard = () => {
 
     const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      dispatch({
-        type: 'SET_PASSWORD',
-        payload: event.target.value
-      });
+        dispatch({
+            type: 'SET_PASSWORD',
+            payload: event.target.value
+        });
     };
 
 
