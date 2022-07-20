@@ -38,9 +38,9 @@ const SignInCard = () => {
     const validEmail = (email:string) =>{
         return /\S+@\S+\.\S+/.test(email);
     }
-    const validPassword = (password:string) => {
-        return password.match()
-      };
+    // const validPassword = (password:string) => {
+    //     return password.match()
+    //   };
 
     
 
@@ -71,18 +71,18 @@ const SignInCard = () => {
 
     const handleNameChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      dispatch({
-        type: 'SET_NAME',
-        payload: event.target.value
-      });
+        dispatch({
+            type: 'SET_NAME',
+            payload: event.target.value
+        });
     };
 
     const handleSurnameChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      dispatch({
-        type: 'SET_SURNAME',
-        payload: event.target.value
-      });
+        dispatch({
+            type: 'SET_SURNAME',
+            payload: event.target.value
+        });
     };
 
     const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> =
@@ -101,6 +101,7 @@ const SignInCard = () => {
 
     const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+
         if(!validPassword(event.target.value)){
             console.log('password not valid')
 
@@ -113,7 +114,6 @@ const SignInCard = () => {
         }
             
         }
-
 
 
     return (
