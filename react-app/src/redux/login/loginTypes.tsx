@@ -1,4 +1,4 @@
-export type State = {
+export type StateLogIn = {
   email: string
   password: string
   isButtonDisabled: boolean

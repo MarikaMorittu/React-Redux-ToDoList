@@ -3,6 +3,7 @@ import "./App.css";
 
 import { useNavigate} from 'react-router-dom'
 import LoginCard from "./pages/loginCard/LoginCard";
+import SignInCard from "./pages/signinCard/SignInCard";
 
 
 
@@ -20,7 +21,8 @@ function App() {
   // })
 
   return <div className="App">
-    <LoginCard />
+    <SignInCard />
+    {/* <LoginCard /> */}
     {/* <p>the status is: {passwordLength}</p>
     <button placeholder="click me" onClick={()=> setPasswordLength(passwordLength = 'true')}></button> */}
   </div>;
