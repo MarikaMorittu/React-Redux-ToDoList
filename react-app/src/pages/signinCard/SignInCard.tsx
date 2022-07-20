@@ -35,14 +35,18 @@ const SignInCard = () => {
         }
     }, [state.name, state.surname, state.email, state.password])
 
-    const validEmail = (email:any) =>{
+    const validEmail = (email:string) =>{
         return /\S+@\S+\.\S+/.test(email);
-
     }
+    const validPassword = (password:string) => {
+        return password.match()
+      };
+
+    
 
 
     const handleSignIn = () => {
-        if(state.email == '@gmail.com', state.password == 'prova'){
+        if(usersArray.find((element)=>element.email === state.email && element.password === state.password)){
             dispatch({
                 type: 'SET_SIGN_IN_SUCCESS',
                 payload: 'User Registrated'
@@ -59,7 +63,7 @@ const SignInCard = () => {
 
 
     const handleKeyPress = (event: React.KeyboardEvent) => {
-        if (event.key == 'Enter') {
+        if (event.key === 'Enter') {
             state.isButtonDisabled || handleSignIn();
         }
     };
@@ -90,17 +94,26 @@ const SignInCard = () => {
                 type: 'SET_EMAIL',
                 payload: event.target.value
             })
+            console.log('email OK')
         }
             
     };
 
     const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      dispatch({
-        type: 'SET_PASSWORD',
-        payload: event.target.value
-      });
-    };
+        if(!validPassword(event.target.value)){
+            console.log('password not valid')
+
+        }else{
+           dispatch({
+                type: 'SET_PASSWORD',
+                payload: event.target.value
+            }) 
+            console.log('password OK')
+        }
+            
+        }
+
 
 
     return (
@@ -110,7 +123,8 @@ const SignInCard = () => {
                 <input type='name' placeholder="name here..." className={styles.nameInput} onChange={handleNameChange} onKeyPress={handleKeyPress}/>
                 <input type='surname' placeholder="surname here..." className={styles.surnameInput} onChange={handleSurnameChange} onKeyPress={handleKeyPress}/>
                 <input type='email' placeholder="email here..." className={styles.firstInput} onChange={handleEmailChange} onKeyPress={handleKeyPress}/>
-                <input type='password' placeholder="password here..." className={styles.firstInput} onChange={handlePasswordChange} onKeyPress={handleKeyPress}/>
+                <input type='password' placeholder="password here..." required minLength={8} className={styles.firstInput} onChange={handlePasswordChange} onKeyPress={handleKeyPress}/>
+                <h4 className={styles.errorPassMex}>password not valid</h4>
                 <div className={styles.btnContainer}>
                     <button onClick={handleSignIn} disabled={state.isButtonDisabled}>Register Now</button>
                 </div>

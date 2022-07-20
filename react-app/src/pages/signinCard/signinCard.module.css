@@ -11,6 +11,10 @@ h2{
     margin-top: 40px;
 }
 
+h4{
+    display: none;
+}
+
 .SignIncardContainer{
     display: flex;
     flex-direction: column;
