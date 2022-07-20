@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import styles from '../signinCard/signinCard.module.css'
 import { usersArray } from '../loginCard/LoginCard'
 import { initialState, signinReducer } from '../../redux/signin/signinReducer'
@@ -35,9 +35,12 @@ const SignInCard = () => {
         }
     }, [state.name, state.surname, state.email, state.password])
 
+
+    let [errorEmail, setErrorEmail] = useState('')
+
+
     const validEmail = (email:any) =>{
         return /\S+@\S+\.\S+/.test(email);
-
     }
 
 
