@@ -2,8 +2,17 @@ import React, { useEffect, useReducer } from 'react'
 import styles from '../signinCard/signinCard.module.css'
 import { usersArray } from '../loginCard/LoginCard'
 import { initialState, signinReducer } from '../../redux/signin/signinReducer'
+import {connect} from 'react-redux'
 
 
+const mapDispatchToProps = (dispatch: any) => {
+    return{
+        changeName: (event: any) => dispatch({type: 'SET_NAME', payload: event.target.value}),
+        changeSurname: (event: any) => dispatch({type: 'SET_SURNAME', payload: event.target.value}),
+        changeEmail: (event: any) => dispatch({type: 'SET_EMAIL', payload: event.target.value}),
+        changePassword: (event: any) => dispatch({type: 'SET_PASSWORD', payload: event.target.value})
+    }
+}
 
 
 const SignInCard = () => {
@@ -48,9 +57,6 @@ const SignInCard = () => {
     };
     
 
-
-
-
     return (
         <div>
             <h2>SignIn with your credentials: </h2>
@@ -67,4 +73,4 @@ const SignInCard = () => {
     )
 }
 
-export default SignInCard
+export default connect (mapDispatchToProps) (SignInCard)
