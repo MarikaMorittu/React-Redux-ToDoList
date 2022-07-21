@@ -1,30 +1,21 @@
 import { getValue } from "@testing-library/user-event/dist/utils";
 import React, { useEffect, useReducer, useState } from "react";
+import { useSelector } from "react-redux";
 import { intialState, loginReducer } from "../../redux/login/loginReducer";
+import { UserType } from "../../redux/users/usersTypes";
 import styles from '../loginCard/loginCard.module.css'
-
-
-
-export const  usersArray = [
-  {
-    email: "marika@gmail.com",
-    password: "Abc12-deF",
-  },
-  {
-    email: "elisa@gmail.com",
-    password: "ciaociao@!2",
-  }
-];
-
 
 
 
 function LoginCard() {
 
   const [state, dispatch] = useReducer(loginReducer, intialState);
-
+  const {users} = useSelector((state: any)=>state.users)
+  const [user, setUser] = useState({email: '', password: '' })
+  
+  
   useEffect(() => {
-    if (state.email.trim() && state.password.trim()) {
+    if (user.email.trim() && user.password.trim()) {
       dispatch({
         type: 'SET_IS_BUTTON_DISABLED',
         payload: false
@@ -35,11 +26,12 @@ function LoginCard() {
         payload: true
       });
     }
-  }, [state.email, state.password]);
+  }, [user.email, user.password]);
 
   const handleLogin = () => {
-    if(state.email == 'prova' && state.password == 'prova'){
-    // if (usersArray.includes(state.email) && usersArray.includes(state.password)) {
+    console.log(users)
+    let userFound = users.find((element:UserType)=> element.email !== user.email && element.password !== user.password)
+    if(userFound){
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: 'Login Successfully'
@@ -63,21 +55,21 @@ function LoginCard() {
 
   const handleUsernameChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      dispatch({
-        type: 'SET_EMAIL',
-        payload: event.target.value
+      setUser({
+        ...user,
+        email: event.target.value
       });
     };
 
   const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      dispatch({
-        type: 'SET_PASSWORD',
-        payload: event.target.value
+      setUser({
+        ...user,
+        password: event.target.value
       });
     }
 
-    // 
+    
 
   return <div className={styles.mainContainer}>
     <h2>Login with your credentials: </h2>

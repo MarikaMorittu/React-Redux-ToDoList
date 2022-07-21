@@ -1,12 +1,9 @@
-import { usersArray } from "../../pages/loginCard/LoginCard";
 import { loginActions } from "./loginAction";
 import { StateLogIn } from "./loginTypes";
 
 
 // create intial state
 export const intialState = {
-  email: '',
-  password: '',
   isButtonDisabled: true,
   helperText: '',
   isError: false
@@ -14,16 +11,6 @@ export const intialState = {
 
 export const loginReducer = (state = intialState, action: loginActions): StateLogIn => {
   switch(action.type){
-    case 'SET_EMAIL':
-      return {
-        ...state,
-        email:action.payload
-      }
-    case 'SET_PASSWORD':
-      return{
-        ...state,
-        password:action.payload
-      }
     case 'SET_IS_BUTTON_DISABLED':
       return{
         ...state,

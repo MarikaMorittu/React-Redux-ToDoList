@@ -21,8 +21,8 @@ function App() {
   // })
 
   return <div className="App">
-    <SignInCard />
-    {/* <LoginCard /> */}
+    {/* <SignInCard /> */}
+    <LoginCard />
     {/* <p>the status is: {passwordLength}</p>
     <button placeholder="click me" onClick={()=> setPasswordLength(passwordLength = 'true')}></button> */}
   </div>;
