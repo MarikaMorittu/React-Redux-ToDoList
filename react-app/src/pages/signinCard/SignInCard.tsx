@@ -1,9 +1,10 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import styles from '../signinCard/signinCard.module.css'
-import { usersArray} from '../loginCard/LoginCard'
 import { initialState, signinReducer } from '../../redux/signin/signinReducer'
 import { StateSignIn } from '../../redux/signin/signinTypes'
 import { store } from '../../redux/store'
+import { UserState, UserType } from '../../redux/users/usersTypes'
+import { useSelector } from 'react-redux'
 
 
 
@@ -12,9 +13,11 @@ import { store } from '../../redux/store'
 const SignInCard = () => {
 
     const [state, dispatch] = useReducer (signinReducer, initialState)
-
+    const [user, setUser] = useState<UserType>({name: '', surname: '', email: '', password: '' })
+    const {users} = useSelector((state: any)=> state.users)
+    
     useEffect(() => {
-        if(state.name.trim() && state.surname.trim() && state.email.trim() && state.password.trim()){
+        if(user.name?.trim() && user.surname?.trim() && user.email.trim() && user.password.trim()){
             dispatch({
                 type: 'SET_IS_BUTTON_DISABLED',
                 payload: false
@@ -25,7 +28,7 @@ const SignInCard = () => {
                 payload: true
             })
         }
-    }, [state.name, state.surname, state.email, state.password])
+    }, [user.name, user.surname, user.email, user.password])
 
     const validEmail = (email:string) =>{
         return /\S+@\S+\.\S+/.test(email);
@@ -38,13 +41,14 @@ const SignInCard = () => {
 
 
     const handleSignIn = () => {
-        let users = usersArray.find((element)=>element.email !== state.email && element.password !== state.password)
-        if(users){
+        console.log(users)
+        let userFound = users.find((element:UserType)=>element.email !== user.email && element.password !== user.password)
+        if(userFound){
             dispatch({
                 type: 'SET_SIGN_IN_FAILED',
                 payload: 'User Registrated'
             })
-            console.log(store.dispatch)
+            console.log('OK')
         }else{
             dispatch({
                 type: 'SET_SIGN_IN_SUCCESS',
@@ -66,17 +70,17 @@ const SignInCard = () => {
 
     const handleNameChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-        dispatch({
-            type: 'SET_NAME',
-            payload: event.target.value
+        setUser({
+           ...user,
+           name: event.target.value
         });
     };
 
     const handleSurnameChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-        dispatch({
-            type: 'SET_SURNAME',
-            payload: event.target.value
+        setUser({
+            ...user,
+            surname: event.target.value
         });
     };
 
@@ -85,26 +89,22 @@ const SignInCard = () => {
         if(!validEmail(event.target.value)){
             console.log('error')
         }else{
-            dispatch({
-                type: 'SET_EMAIL',
-                payload: event.target.value
+            setUser({
+                ...user,
+                email: event.target.value
             })
             console.log('email OK')
-        }
-            
+        }    
     };
-
-
-
 
     const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
         if(!validPassword(event.target.value)){
             console.log('password NO')
         }else{
-            dispatch({
-                type: 'SET_PASSWORD',
-                payload: event.target.value
+            setUser({
+                ...user,
+                password: event.target.value
             }) 
             console.log('password OK')
         }
