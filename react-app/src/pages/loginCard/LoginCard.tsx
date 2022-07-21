@@ -3,7 +3,9 @@ import React, { useEffect, useReducer, useState } from "react";
 import { intialState, loginReducer } from "../../redux/login/loginReducer";
 import styles from '../loginCard/loginCard.module.css'
 
-export const usersArray = [
+
+
+export const  usersArray = [
   {
     email: "marika@gmail.com",
     password: "Abc12-deF",
@@ -11,8 +13,9 @@ export const usersArray = [
   {
     email: "elisa@gmail.com",
     password: "ciaociao@!2",
-  },
+  }
 ];
+
 
 
 
