@@ -37,8 +37,8 @@ input{
 }
 
 
-/* required input */
-.passInput:invalid {
+/* invalid password & email input */
+.passInput:invalid:focus{
     background-color: #f5b0b0;
 }
 
@@ -58,6 +58,3 @@ input:valid {
     border-width: 3px;
 } */
 
-input:required:invalid {
-    border-color: #c00000;
-}
