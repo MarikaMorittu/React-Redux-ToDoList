@@ -32,6 +32,32 @@ h4{
 
 
 /* Display error message */
-/* .displayErrorMessage{
-    display: none;
+input{
+    border: 1px solid rgb(158, 155, 155);
+}
+
+
+/* required input */
+.passInput:invalid {
+    background-color: #f5b0b0;
+}
+
+.emailInput:invalid{
+    background-color: #f5b0b0;
+}
+
+
+/* valid inputs */
+input:valid {
+    background-color: #ffffff;
+}
+
+/* email border */
+/* input:required {
+    border-color: #ffffff;
+    border-width: 3px;
 } */
+
+input:required:invalid {
+    border-color: #c00000;
+}

@@ -120,8 +120,7 @@ const SignInCard = () => {
                 <input type='name' placeholder="name here..." className={styles.nameInput} onChange={handleNameChange} onKeyPress={handleKeyPress}/>
                 <input type='surname' placeholder="surname here..." className={styles.surnameInput} onChange={handleSurnameChange} onKeyPress={handleKeyPress}/>
                 <input type='email' placeholder="email here..." className={styles.emailInput} onChange={handleEmailChange} onKeyPress={handleKeyPress}/>
-                <input type='password' placeholder="password here..." required minLength={8} title="" className={styles.passInput} onChange={handlePasswordChange} onKeyPress={handleKeyPress}/>
-                {/* <p className= 'displayErrorMessage'> Password must contain at least one number, one uppercase and lowercase letter and  at least 8 characters</p> */}
+                <input type='password' placeholder="password here..." required minLength={8} title="Password must contain at least one number, one uppercase and lowercase letter and  at least 8 characters" className={styles.passInput} onChange={handlePasswordChange} onKeyPress={handleKeyPress}/>
                 <div className={styles.btnContainer}>
                     <button onClick={handleSignIn} disabled={state.isButtonDisabled}>Register Now</button>
                 </div>
