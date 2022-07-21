@@ -1,3 +1,4 @@
+import { usersArray } from "../../pages/loginCard/LoginCard"
 import { signinAction } from "./signinAction"
 import { StateSignIn } from "./signinTypes"
 
@@ -9,7 +10,8 @@ export const initialState = {
     password: '',
     isButtonDisabled: true,
     helperText: '',
-    isError: false
+    isError: false,
+    // newUsersArray: usersArray
 }
 
 
@@ -57,6 +59,11 @@ export const signinReducer = (state = initialState, action: signinAction): State
                 ...state,
                 isError: action.payload
             }
+        // case 'SET_NEW_USER':
+        //     return{
+        //         ...state,
+        //         newUsersArray: [...state.newUsersArray, action.payload]
+        //     }
         default: return state
     }
 }

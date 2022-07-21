@@ -5,5 +5,6 @@ export type StateSignIn = {
     password: string,
     isButtonDisabled: boolean,
     helperText: string,
-    isError: boolean
+    isError: boolean,
+    // newUsersArray: string
 }

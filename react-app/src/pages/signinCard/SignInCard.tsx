@@ -1,19 +1,11 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import styles from '../signinCard/signinCard.module.css'
-import { usersArray } from '../loginCard/LoginCard'
+import { usersArray} from '../loginCard/LoginCard'
 import { initialState, signinReducer } from '../../redux/signin/signinReducer'
 import { StateSignIn } from '../../redux/signin/signinTypes'
-// import {connect} from 'react-redux'
+import { store } from '../../redux/store'
 
 
-// const mapDispatchToProps = (dispatch: any) => {
-//     return{
-//         changeName: (event: any) => dispatch({type: 'SET_NAME', payload: event.target.value}),
-//         changeSurname: (event: any) => dispatch({type: 'SET_SURNAME', payload: event.target.value}),
-//         changeEmail: (event: any) => dispatch({type: 'SET_EMAIL', payload: event.target.value}),
-//         changePassword: (event: any) => dispatch({type: 'SET_PASSWORD', payload: event.target.value})
-//     }
-// }
 
 
 
@@ -38,28 +30,31 @@ const SignInCard = () => {
     const validEmail = (email:string) =>{
         return /\S+@\S+\.\S+/.test(email);
     }
-    // const validPassword = (password:string) => {
-    //     return password.match()
-    //   };
+    const validPassword = (password:string) => {
+        return password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%* #+=\(\)\^?&])[A-Za-z\d$@$!%* #+=\(\)\^?&]{8,}$/)
+        };
 
-    
+
 
 
     const handleSignIn = () => {
-        if(usersArray.find((element)=>element.email === state.email && element.password === state.password)){
-            dispatch({
-                type: 'SET_SIGN_IN_SUCCESS',
-                payload: 'User Registrated'
-            })
-            console.log('OK')
-        }else{
+        let users = usersArray.find((element)=>element.email !== state.email && element.password !== state.password)
+        if(users){
             dispatch({
                 type: 'SET_SIGN_IN_FAILED',
+                payload: 'User Registrated'
+            })
+            console.log(store.dispatch)
+        }else{
+            dispatch({
+                type: 'SET_SIGN_IN_SUCCESS',
                 payload: 'User not Registrated'
             })
-            console.log('NO')
+            console.log('Non puoi registrarti')
         }
     }
+
+
 
 
     const handleKeyPress = (event: React.KeyboardEvent) => {
@@ -99,21 +94,23 @@ const SignInCard = () => {
             
     };
 
+
+
+
     const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-
         if(!validPassword(event.target.value)){
-            console.log('password not valid')
-
+            console.log('password NO')
         }else{
-           dispatch({
+            dispatch({
                 type: 'SET_PASSWORD',
                 payload: event.target.value
             }) 
             console.log('password OK')
         }
-            
         }
+
+
 
 
     return (
@@ -122,9 +119,9 @@ const SignInCard = () => {
             <div className={styles.SignIncardContainer}>
                 <input type='name' placeholder="name here..." className={styles.nameInput} onChange={handleNameChange} onKeyPress={handleKeyPress}/>
                 <input type='surname' placeholder="surname here..." className={styles.surnameInput} onChange={handleSurnameChange} onKeyPress={handleKeyPress}/>
-                <input type='email' placeholder="email here..." className={styles.firstInput} onChange={handleEmailChange} onKeyPress={handleKeyPress}/>
-                <input type='password' placeholder="password here..." required minLength={8} className={styles.firstInput} onChange={handlePasswordChange} onKeyPress={handleKeyPress}/>
-                <h4 className={styles.errorPassMex}>password not valid</h4>
+                <input type='email' placeholder="email here..." className={styles.emailInput} onChange={handleEmailChange} onKeyPress={handleKeyPress}/>
+                <input type='password' placeholder="password here..." required minLength={8} title="" className={styles.passInput} onChange={handlePasswordChange} onKeyPress={handleKeyPress}/>
+                {/* <p className= 'displayErrorMessage'> Password must contain at least one number, one uppercase and lowercase letter and  at least 8 characters</p> */}
                 <div className={styles.btnContainer}>
                     <button onClick={handleSignIn} disabled={state.isButtonDisabled}>Register Now</button>
                 </div>
@@ -132,5 +129,8 @@ const SignInCard = () => {
         </div>
     )
 }
+
+
+
 
 export default SignInCard
